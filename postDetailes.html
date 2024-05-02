@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Detailes</title>
+    <link rel="icon"  href="images/Placeholders/facebook.png"> <!--img title-->
+
+    <!-- css links -->
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/js/">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="css/test.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+    <!--js links-->
+    <!-- <script src="js/popper.min.js"></script> -->
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="./node_modules/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <!-- loader -->
+    <div id="loader" style="position: fixed;  top: 0; bottom: 0; right: 0; left: 0; margin: auto auto
+    ; display: flex;justify-content: center;align-items: center ;z-index: 999;width: 100px;height: 100px; background-color: rgba(203, 203, 203, 0.504); border-radius: 20px;">
+        <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    </div>
+
+    <!-- models -->
+    <!--Login model  -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Login</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">User Name:</label>
+                            <input type="text" class="form-control" id="UserName-input">
+                        </div>
+                        <div class="mb-3">
+                            <label for="message-text" class="col-form-label">Password:</label>
+                            <input type="password" class="form-control" id="password-input">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="LoginBtn()">Login</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end Login models -->
+
+    <!--Register model  -->
+    <div class="modal fade" id="RegisterModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Register A New User </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Name:</label>
+                            <input type="text" class="form-control" id="Register-Name-input">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">User Name:</label>
+                            <input type="text" class="form-control" id="Register-UserName-input">
+                        </div>
+                        <div class="mb-3">
+                            <label for="message-text" class="col-form-label">Password:</label>
+                            <input type="password" class="form-control" id="Register-password-input">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">Default file input example</label>
+                            <input class="form-control" type="file" id="Register-img-input">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="RegisterBtn()">Register</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end Register models -->
+
+
+    <!--Add-Post-model  -->
+    <div class="modal fade" id="Create-Post-Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel"> Create Post </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Title:</label>
+                            <input type="text" class="form-control" id="Post-Title-input">
+                        </div>
+
+                        <div class="mb-3">
+
+                            <textarea name="" id="Post-body-input" class="form-control" rows="3">
+
+                                    </textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">Default file input example</label>
+                            <input class="form-control" type="file" id="Post-img-input">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="CreateNewPostClicked()">Post</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end Add-Post-model -->
+
+    <!-- end models -->
+
+    <!--Start Add Post Button -->
+    <!-- <div class="bg-primary" id="add-btn"  data-bs-toggle="modal"
+         data-bs-target="#Create-Post-Modal">
+             +
+         </div> -->
+    <!--End Add Post Button -->
+
+    <!-- Alerts -->
+    <div id="success-alert" class="show fade" style="position: fixed;z-index: 99999;width: 30%;bottom: 0;right: 0;">
+    </div>
+
+     <!-- header starts -->
+     <div class="header">
+        <div class="header__left">
+            <h3 style="color: #007bff;">facebook</h3>
+            <img src="https://upload.wikimedia.org/wikipedia/commons
+                /thumb/5/51/Facebook_f_logo_%282019%29.svg/1200px Facebook_f_logo_%282019%29.svg.png" alt="" />
+            <div class="header__input">
+                <span class="material-icons"> search </span>
+                <input type="text" placeholder="Search Facebook" />
+            </div>
+        </div>
+
+        <div class="header__middle">
+            <div class="header__option active">
+                <span class="material-icons" onclick="homePage()"> home </span>
+            </div>
+            <div class="header__option">
+                <span class="material-icons"> flag </span>
+            </div>
+            <div class="header__option">
+                <span class="material-icons"> subscriptions </span>
+            </div>
+            <div class="header__option">
+                <span class="material-icons"> storefront </span>
+            </div>
+            <div class="header__option">
+                <span class="material-icons" onclick="profileClicked()" style="cursor: pointer;"> supervised_user_circle </span>
+            </div>
+        </div>
+
+        <div class="header__right">
+    
+            <!-- Logged In user -->
+            <div class="w-100 d-flex justify-content-end" id="logged-in-div">
+
+                <button id="login-btn" type="button" class="btn btn-outline-success mx-2" data-bs-toggle="modal"
+                    data-bs-target="#loginModal">Login</button>
+
+                <button id="register-btn" type="button" data-bs-toggle="modal" data-bs-target="#RegisterModal"
+                    class="btn btn-outline-success">Register</button>
+
+            </div>
+
+            <!-- Logged out user -->
+            <div class="w-100 d-flex justify-content-end align-items-center" id="logout-div">
+                <img id="Nav-userImage" class="rounded-circle" style="width: 40px;height: 40px;"
+                    src="images/profile-pics/nada.jpg" alt="profile-pics">
+                <b id="Nav-userName"> Nada gamal</b>
+                <button onclick="logout()" id="logout-btn" type="button"
+                    class="btn btn-outline-danger mx-2">Logout</button>
+            </div>
+
+            <span class="material-icons"> add </span>
+            <span class="material-icons"> forum </span>
+            <span class="material-icons"> notifications_active </span>
+            <span class="material-icons"> expand_more </span>
+        </div>
+    </div>
+    <!-- header ends -->
+
+    <!--Start main content -->
+    <div class="container " style="height: 1000px;">
+
+
+        
+        <div class="row d-flex justify-content-center mt-5">
+            <!-- user posts -->
+            <div class="col-lg-9 posts-container">
+                
+                <h1>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-chat-right-text" viewBox="0 0 16 16">
+                        <path d="M2 1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h9.586a2 2 0 0 1 1.414.586l2 2V2a1 1 0 0 0-1-1zm12-1a2 2 0 0 1 2 2v12.793a.5.5 0 0 1-.854.353l-2.853-2.853a1 1 0 0 0-.707-.293H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2z"/>
+                        <path d="M3 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5M3 6a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 6m0 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5"/>
+                      </svg>
+                    <span id="userName-span" > Nadagamal</span>
+                    Posts
+                </h1>
+            </div>
+        </div>
+
+        <!-- Posts -->
+        <div class="row d-flex justify-content-center mt-5">
+            <div class="col-lg-9" id="post">
+
+                <!-- Post cards -->
+                <div class="card shadow">
+                    <div class="card-header">
+                        <img src="images/profile-pics/nada.jpg" alt="nada png" style="width: 40px ; height:40px;"
+                            class="rounded-circle border border-2 ">
+                        <b>nada gamal</b>
+                    </div>
+                    <div class="card-body">
+                        <img class="w-100" src="images/Placeholders/Rome1r.jpg">
+
+                        <h6 style="color: rgb(199, 196, 196);" class="mt-1">2 min ago</h6>
+                        <h5>Hello world</h5>
+                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Veritatis, quis.</p>
+                        <hr>
+
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-chat-left-text" viewBox="0 0 16 16">
+                                <path
+                                    d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z" />
+                                <path
+                                    d="M3 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5M3 6a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 6m0 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5" />
+                            </svg>
+                            <span>(3) comments
+
+                                <spna>
+                                    <button type="button" class="btn btn-secondary rounded-5">Secondary</button>
+                                </spna>
+                            </span>
+
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- comments -->
+                    <div class="p-3" style="background-color: rgb(221, 221, 221);">
+                        <!-- profile pic + userName -->
+                        <img src="images/profile-pics/nada.jpg" class="rounded-circle" style="width: 40px;height: 40px;">
+                        <b>userName</b>
+                        <!-- End profile pic + userName -->
+
+                        <!-- comment Body -->
+                        <div>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae, ipsum!
+                        </div>
+
+                    </div>
+                    <!-- End coments -->
+
+                </div>
+
+                <!-- end post cards -->
+            </div>
+        </div>
+        <!-- end post1 -->
+
+        <!-- End posts -->
+
+    </div>
+    <!-- End main content -->
+
+
+
+
+
+    <script src="jquery-3.6.4.min.js"></script>
+    <script src="Js/main.js"></script>
+</body>
+
+</html>
+
+
+
+
